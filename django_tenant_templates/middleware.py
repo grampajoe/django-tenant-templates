@@ -9,4 +9,4 @@ class TenantMiddleware(object):
     slug_property_name = 'tenant_slug'
 
     def process_request(self, request):
-        local.tenant_slug = getattr(request, self.slug_property_name)
+        local.tenant_slug = getattr(request, self.slug_property_name, None)

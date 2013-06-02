@@ -22,6 +22,7 @@ class TestTenantMiddleware(unittest.TestCase):
         self.assertEqual(local.tenant_slug, request.tenant_slug)
 
     def test_tenant_slug_name(self, local):
+        """Test setting the slug property name."""
         request = mock.Mock()
 
         self.middleware.slug_property_name = 'fart'
@@ -29,3 +30,11 @@ class TestTenantMiddleware(unittest.TestCase):
         self.middleware.process_request(request)
 
         self.assertEqual(local.tenant_slug, request.fart)
+
+    def test_no_tenant_slug(self, local):
+        """Test not setting a slug."""
+        request = mock.Mock(spec=object)
+
+        self.middleware.process_request(request)
+
+        self.assertEqual(local.tenant_slug, None)
