@@ -10,3 +10,9 @@ class TenantMiddleware(object):
 
     def process_request(self, request):
         local.tenant_slug = getattr(request, self.slug_property_name, None)
+
+    def process_exception(self, request, exception):
+        try:
+            del local.tenant_slug
+        except AttributeError:
+            pass
