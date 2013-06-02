@@ -14,6 +14,7 @@ setup(
     description='Tenant-aware templating for Django.',
     author='Joe Friedl',
     author_email='joe@joefriedl.net',
+    url='https://github.com/grampajoe/django-tenant-templates',
     packages=('django_tenant_templates',),
     install_requires=requires,
     license='MIT',
