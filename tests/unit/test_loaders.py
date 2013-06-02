@@ -26,12 +26,12 @@ class FakeLoader(TenantLoaderMixin, FakeBaseLoader):
     """A fake loader."""
 
 
-@mock.patch('django_tenant_templates.loaders.local', spec=True)
 class TestTenantLoaderMixin(unittest.TestCase):
     """Tests for the tenant loader mixin."""
     def setUp(self):
         self.loader = FakeLoader()
 
+    @mock.patch('django_tenant_templates.loaders.local', spec=True)
     def test_loader(self, local):
         """Test the loader."""
         local.tenant_slug = 'test'
@@ -43,10 +43,25 @@ class TestTenantLoaderMixin(unittest.TestCase):
             mock.sentinel.dirs,
         )
 
+    @mock.patch('django_tenant_templates.loaders.local', spec=True)
     def test_loader_no_slug(self, local):
         """Test the loader with no tenant slug."""
         local.tenant_slug = None
 
+        self.loader.get_template_sources('test.html', mock.sentinel.dirs)
+
+        self.loader.get_sources_spy.assert_called_with(
+            'test.html',
+            mock.sentinel.dirs,
+        )
+
+    @mock.patch('django_tenant_templates.loaders.local', spec=object)
+    def test_loader_missing_slug(self, local):
+        """Test the loader when the tenant slug is missing.
+
+        This happens when an unhandled exception is raised before
+        TenantMiddleware can run.
+        """
         self.loader.get_template_sources('test.html', mock.sentinel.dirs)
 
         self.loader.get_sources_spy.assert_called_with(
