@@ -14,16 +14,16 @@ class TestTenantTemplates(TestCase):
         """Test that template loading falls through without a tenant."""
         response = self.client.get('/')
 
-        self.assertEqual('no\n', response.content)
+        self.assertEqual(response.content, b'no\n')
 
     def test_filesystem_loader(self):
         """Test finding a tenant template with the filesystem loader."""
         response = self.client.get('/?tenant=filesystem')
 
-        self.assertEqual('filesystem\n', response.content)
+        self.assertEqual(response.content, b'filesystem\n')
 
     def test_app_loader(self):
         """Test finding a tenant template with the app loader."""
         response = self.client.get('/?tenant=app')
 
-        self.assertEqual('app\n', response.content)
+        self.assertEqual(response.content, b'app\n')
