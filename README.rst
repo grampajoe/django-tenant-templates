@@ -52,6 +52,11 @@ and a forward slash. If `request.tenant_slug` is `'my_tenant'`,
 To fall back to non-tenant template loading, make sure to include other
 template loaders after the tenant loaders in `settings.TEMPLATE_LOADERS`.
 
+If you want to explicitly load a non-tenant template, prefix the template name
+with './'. This allows you to extend a non-tenant template with the same name
+as the tenant template, which can be useful for things like overriding only
+part of a base template rather than replacing the whole thing.
+
 Middleware
 ----------
 

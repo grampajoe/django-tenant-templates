@@ -68,3 +68,15 @@ class TestTenantLoaderMixin(unittest.TestCase):
             'test.html',
             mock.sentinel.dirs,
         )
+
+    @mock.patch('django_tenant_templates.loaders.local', spec=True)
+    def test_loader_explicit_default(self, local):
+        """Test explicitly loading a non-tenant template."""
+        local.tenant_slug = 'test'
+
+        self.loader.get_template_sources('./test.html', mock.sentinel.dirs)
+
+        self.loader.get_sources_spy.assert_called_with(
+            './test.html',
+            mock.sentinel.dirs,
+        )

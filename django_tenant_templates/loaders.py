@@ -10,7 +10,11 @@ from django_tenant_templates import local
 class TenantLoaderMixin(object):
     """Mixin for making template loaders tenant-aware."""
     def get_template_sources(self, template_name, template_dirs=None):
-        if hasattr(local, 'tenant_slug') and local.tenant_slug is not None:
+        if (
+                not template_name.startswith('./') and
+                hasattr(local, 'tenant_slug') and
+                local.tenant_slug is not None
+        ):
             template_name = '%s/%s' % (local.tenant_slug, template_name)
 
         return super(TenantLoaderMixin, self).get_template_sources(
