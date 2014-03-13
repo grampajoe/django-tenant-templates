@@ -4,7 +4,7 @@ Django Tenant Templates
 from threading import local as _local
 
 
-version = '0.4'
+version = '0.5'
 
 
 local = _local()
