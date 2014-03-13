@@ -12,7 +12,8 @@ class TenantMiddleware(object):
         local.tenant_slug = getattr(request, self.slug_property_name, None)
 
     def process_exception(self, request, exception):
-        try:
-            del local.tenant_slug
-        except AttributeError:
-            pass
+        """ Used to disable tenant-specific template loading on errors. 
+        Now has no special behavior as it is desirable to have tenant-specific
+        error handling pages.
+        """
+        pass
