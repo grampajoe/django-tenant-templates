@@ -6,7 +6,10 @@ except ImportError:
 
 from django.views.generic import TemplateView
 
+from .views import error_500
+
 
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='base.html')),
+    url(r'^error_500$', error_500),
 )

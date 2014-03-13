@@ -10,5 +10,7 @@ matrix:
     exclude:
         - python: "3.3"
           env: DJANGO_VERSION='>=1.4,<1.5'
-install: pip install Django$DJANGO_VERSION --use-mirrors
+install:
+    - pip install -q Django$DJANGO_VERSION
+    - pip install -q -r test_requirements.txt
 script: nosetests

@@ -39,6 +39,9 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
 )
 
+# This is just for LiveServerTestCase
+STATIC_URL = 'static/'
+
 INSTALLED_APPS = (
     'tests.integration.test_app',
 )
