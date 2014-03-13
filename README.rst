@@ -3,9 +3,6 @@ Django Tenant Templates
 
 Tenant-aware templating for Django.
 
-**This project is a proof of concept. Using it in production is strongly
-discouraged.**
-
 Overview
 --------
 
